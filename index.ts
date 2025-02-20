@@ -1,9 +1,9 @@
-import Fastify from "fastify";
+import Fastify, { FastifyInstance } from "fastify";
 import fastifyCors from "@fastify/cors";
 import { userRoutes } from "./routes/user";
 import { drinksRoutes } from "./routes/drinks";
 
-const fastify = Fastify({
+const fastify: FastifyInstance = Fastify({
   logger: true,
 });
 
