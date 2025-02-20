@@ -1,18 +1,18 @@
 import { drinks_stats } from "../db/schema";
 import { eq, desc, sql } from "drizzle-orm";
-import { FastifyInstance } from "fastify";
+import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { drinks } from "../db/schema";
 import { db } from "../db";
 
 export async function drinksRoutes(fastify: FastifyInstance) {
-  fastify.get("/drinks/all", async (request, reply) => {
+  fastify.get("/drinks/all", async (request: FastifyRequest, reply: FastifyReply) => {
     console.log("GET /drinks/all");
     const allDrinks = await db.select().from(drinks);
     console.log(allDrinks);
     return reply.status(200).send(allDrinks);
   });
 
-  fastify.get("/drinks/top", async (request, reply) => {
+  fastify.get("/drinks/top", async (request: FastifyRequest, reply: FastifyReply) => {
     console.log("GET /drinks/top");
     const topDrinks = await db
       .select({

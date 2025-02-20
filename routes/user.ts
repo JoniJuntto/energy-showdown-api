@@ -1,9 +1,8 @@
-import { FastifyInstance } from "fastify";
+import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 import { eq, desc, sql } from "drizzle-orm";
 import { db } from "../db";
 import { drinks, drinks_stats, votes } from "../db/schema";
-import fastifyCors from "@fastify/cors";
 const VoteSchema = z.object({
   winner_ean: z.string(),
   loser_ean: z.string(),
@@ -16,7 +15,7 @@ const UserParamsSchema = z.object({
 });
 
 export async function userRoutes(fastify: FastifyInstance) {
-  fastify.post("/votes", async (request, reply) => {
+  fastify.post("/votes", async (request: FastifyRequest, reply: FastifyReply) => {
     const body = VoteSchema.parse(request.body);
 
     try {
@@ -72,7 +71,7 @@ export async function userRoutes(fastify: FastifyInstance) {
     }
   });
 
-  fastify.get("/users/:userId/stats", async (request, reply) => {
+  fastify.get("/users/:userId/stats", async (request: FastifyRequest, reply: FastifyReply) => {
     const { userId } = UserParamsSchema.parse(request.params);
 
     try {
@@ -130,7 +129,6 @@ export async function userRoutes(fastify: FastifyInstance) {
         drinkStats[vote.loser_ean].losses++;
       }
 
-      // Convert to array and sort by wins
       const statsArray = Object.values(drinkStats).sort(
         (a: any, b: any) => b.wins - a.wins
       );
