@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "npx tsx watch index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node dist/index.js",
     "db:generate": "npx drizzle-kit generate",
     "db:migrate": "npx drizzle-kit migrate"
   },
@@ -14,5 +16,10 @@
   "description": "",
   "dependencies": {
     "@fastify/cors": "^10.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
   }
 }
