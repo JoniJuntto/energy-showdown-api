@@ -5,6 +5,7 @@ import { drinks } from "../db/schema";
 import { db } from "../db";
 
 export async function drinksRoutes(fastify: FastifyInstance) {
+  
   fastify.get("/drinks/all", async (request: FastifyRequest, reply: FastifyReply) => {
     console.log("GET /drinks/all");
     const allDrinks = await db.select().from(drinks);

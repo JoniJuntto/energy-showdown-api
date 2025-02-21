@@ -2,6 +2,7 @@ import Fastify, { FastifyInstance } from "fastify";
 import fastifyCors from "@fastify/cors";
 import { userRoutes } from "./routes/user";
 import { drinksRoutes } from "./routes/drinks";
+import { analyticsRoutes } from "./routes/analytics";
 
 const port = process.env.PORT || 3000;
 const host = ("RENDER" in process.env) ? `0.0.0.0` : `localhost`;
@@ -16,6 +17,8 @@ fastify.register(fastifyCors, {
 
 fastify.register(drinksRoutes);
 fastify.register(userRoutes);
+fastify.register(analyticsRoutes);
+
 fastify.listen({ host: host, port: port as number }, (err, address) => {
   if (err) {
     fastify.log.error(err);
